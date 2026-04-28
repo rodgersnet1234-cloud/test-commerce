@@ -1,0 +1,56 @@
+{
+  "app_key": "<Your appKey>;覆盖优先级：YopRequest >> YopConfig >> 配置文件",
+  "aes_secret_key": "<Your appSecret>;覆盖优先级：YopRequest >> YopConfig >> 配置文件",
+  "server_root": "https://openapi.yeepay.com/yop-center",
+  "yos_server_root": "https://yos.yeepay.com/yop-center",
+  "sandbox_server_root": "https://sandbox.yeepay.com/yop-center",
+  "isv_private_key": [
+    {
+      "app_key": "<Your appKey>",
+      "store_type": "string",
+      "cert_type": "RSA2048",
+      "value": "<Your RSA2048 private key>"
+    },
+    {
+      "app_key": "<Your appKey>",
+      "store_type": "file_p12",
+      "cert_type": "RSA2048",
+      "password": "123456",
+      "value": "/10015004197.p12"
+    },
+    {
+      "app_key": "<Your appKey>",
+      "store_type": "string",
+      "cert_type": "SM2",
+      "value": "<Your SM2 private key>"
+    }
+  ],
+  "isv_encrypt_key": [
+    {
+      "app_key": "<Your appKey>",
+      "store_type": "string",
+      "cert_type": "SM4",
+      "value": "<Your SM4 encrypt key>"
+    }
+  ],
+  "yop_cert_store": {
+    "enable": true,//是否开启本地存储
+    "path": "<Your cert store path, 默认/tmp/yop/certs>",
+    "valid_after_expire_period": 86400000,//证书过期后可用时间(毫秒)，默认24小时
+    "refresh_before_expire_period": 259200000//证书过期前开始刷新时间(毫秒)，默认72小时
+  },
+  "http_client": {
+    "connect_timeout": 10000,
+    "read_timeout": 30000,
+    "max_conn_total": 200,
+    "max_conn_per_route": 100
+  },
+  "proxy": {
+    "host": "",
+    "port": "",
+    "username": "",
+    "password": "",
+    "domain": "",
+    "workstation": ""
+  }
+}

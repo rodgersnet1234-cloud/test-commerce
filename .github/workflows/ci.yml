@@ -83,6 +83,24 @@ jobs:
             ${{ runner.os }}-maven-
 
       # Step 1: Compile comm-parent and create common.jar
+      - name: Build local SDK modules
+        run: |
+          set -e
+
+          echo "Building YOP SDK..."
+          if [ -d "lib/yop-java-sdk-4.3.3-20230421155139-saas" ]; then
+            cd lib/yop-java-sdk-4.3.3-20230421155139-saas
+            mvn clean install -DskipTests
+            cd -
+          fi
+
+          echo "Building Meituan SDK..."
+          if [ -d "lib/meituan-union-java" ]; then
+            cd lib/meituan-union-java
+            mvn clean install -DskipTests
+            cd -
+          fi 
+
       - name: Compile ALL
         run: |
           mvn clean install -DskipTests
