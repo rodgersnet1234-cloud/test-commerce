@@ -142,7 +142,7 @@ jobs:
                
             echo "Starting $APP_NAME..."
             setsid java -jar "$FULL_PATH" > "$FULL_PATH.log" 2>&1 < /dev/null &
-            sleep 5
+            sleep 15
             FINAL_PID=$(cat "$PID_FILE")
             if kill -0 "$FINAL_PID" 2>/dev/null; then
                echo "Binary started successfully (PID=$FINAL_PID)"
