@@ -87,6 +87,7 @@ public class AuthController {
         // 密码解密
         RSA rsa = new RSA(privateKey, null);
         String password = new String(rsa.decrypt(authUser.getPassword(), KeyType.PrivateKey));
+        System.out.println("REACHED HERE -- LOGIN");
 //        String code = "123456";
         // 查询验证码
 //        String code = (String) redisUtils.get("admin_code_" + authUser.getUsername());
