@@ -16,9 +16,12 @@ jobs:
 
     steps:
       # Checkout the repository
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Copy java.zip from remote server
         env:
           SSH_USER: ${{ secrets.USER }}
