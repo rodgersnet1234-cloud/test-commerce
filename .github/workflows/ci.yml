@@ -141,7 +141,7 @@ jobs:
             mv "$APP_DIR/tmp/$APP_NAME" "$FULL_PATH"
                
             echo "Starting $APP_NAME..."
-            setsid nohup java -jar "$FULL_PATH" > "$FULL_PATH.log" 2>&1 < /dev/null &
+            nohup java -jar "$FULL_PATH" > "$FULL_PATH.log" 2>&1 < /dev/null &
             NEW_PID=$!
             echo "$NEW_PID" > "$PID_FILE"
             sleep 25
