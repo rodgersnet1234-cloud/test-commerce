@@ -112,38 +112,50 @@ jobs:
       - name: CHECK DIRS
         run: |
           mv mshop-admin/target/mshop-admin-5.1.0.jar /www/wwwroot/cpsmanager.hngckj.top/tmp/
-          ls mshop-app/target/
+#          mv mshop-app/target/mshop-app-5.1.0.jar /www/wwwroot/cpsapi.hngckj.top/tmp/
 #
-#      - name: Deploy buyer safely
-#        run: |
-#          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} '
-#            APP_DIR=/ecommerce/consumer
-#            APP_NAME=consumer-4.3.jar
-#            PID_FILE="$APP_DIR/$APP_NAME.pid"
-#            FULL_PATH="$APP_DIR/$APP_NAME"
-#            cd $APP_DIR
-#            if [ -f "$APP_NAME" ]; then
-#              i=1
-#              while [ -f "$APP_NAME.bak$i" ]; do i=$((i+1)); done
-#              cp "$APP_NAME" "$APP_NAME.bak$i" # Use cp so we can still kill the running one
-#              echo "Existing binary backed up as $APP_NAME.bak$i"
-#            fi
-#            if [ -f "$PID_FILE" ]; then
-#                OLD_PID=$(cat "$PID_FILE")
-#                if kill -0 "$OLD_PID" 2>/dev/null; then
-#                    echo "Stopping process $OLD_PID..."
-#                    kill "$OLD_PID" && sleep 2
-#                    kill -9 "$OLD_PID" 2>/dev/null || true
-#                fi
-#                rm "$PID_FILE"
-#            fi
-#            EXTRA_PIDS=$(pgrep -f "$FULL_PATH")
-#            if [ -n "$EXTRA_PIDS" ]; then
-#                echo "Cleaning up lingering processes: $EXTRA_PIDS"
-#                echo "$EXTRA_PIDS" | xargs kill -9 2>/dev/null || true
-#            fi
-#            mv "$APP_DIR/tmp/$APP_NAME" "$FULL_PATH"
-#          '
+      - name: Deploy Admin safely
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} '
+            APP_DIR=/www/wwwroot/cpsmanager.hngckj.top
+            APP_NAME=mshop-admin-5.1.0.jar
+            PID_FILE="$APP_DIR/$APP_NAME.pid"
+            FULL_PATH="$APP_DIR/$APP_NAME"
+            cd $APP_DIR
+            if [ -f "$APP_NAME" ]; then
+              i=1
+              while [ -f "$APP_NAME.bak$i" ]; do i=$((i+1)); done
+              cp "$APP_NAME" "$APP_NAME.bak$i" # Use cp so we can still kill the running one
+              echo "Existing binary backed up as $APP_NAME.bak$i"
+            fi
+            if [ -f "$PID_FILE" ]; then
+                OLD_PID=$(cat "$PID_FILE")
+                if kill -0 "$OLD_PID" 2>/dev/null; then
+                    echo "Stopping process $OLD_PID..."
+                    kill "$OLD_PID" && sleep 2
+                    kill -9 "$OLD_PID" 2>/dev/null || true
+                fi
+                rm "$PID_FILE"
+            fi
+            EXTRA_PIDS=$(pgrep -f "$FULL_PATH")
+            if [ -n "$EXTRA_PIDS" ]; then
+                echo "Cleaning up lingering processes: $EXTRA_PIDS"
+                echo "$EXTRA_PIDS" | xargs kill -9 2>/dev/null || true
+            fi
+            mv "$APP_DIR/tmp/$APP_NAME" "$FULL_PATH"
+               
+            echo "Starting $APP_NAME..."
+            setsid nohup java -jar "$FULL_PATH" > "$FULL_PATH.log" 2>&1 & echo $! > "$PID_FILE"
+            sleep 5
+            FINAL_PID=$(cat "$PID_FILE")
+            if kill -0 "$FINAL_PID" 2>/dev/null; then
+               echo "Binary started successfully (PID=$FINAL_PID)"
+            else
+               echo "Binary failed to start! Last 10 lines of log:"
+               tail -n 10 "$FULL_PATH.log"
+               exit 1
+            fi
+          '
 
 #      - name: Move ALL
 #        run: |
