@@ -89,9 +89,9 @@ public class AuthController {
         String password = new String(rsa.decrypt(authUser.getPassword(), KeyType.PrivateKey));
 //        String code = "123456";
         // 查询验证码
-        String code = (String) redisUtils.get("admin_code_" + authUser.getUsername());
+//        String code = (String) redisUtils.get("admin_code_" + authUser.getUsername());
         // 清除验证码
-        redisUtils.del(authUser.getUuid());
+//        redisUtils.del(authUser.getUuid());
 //        if (StringUtils.isBlank(code)) {
 //            throw new BadRequestException("验证码不存在或已过期");
 //        }
