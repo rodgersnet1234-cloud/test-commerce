@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     environment:
       name: production
 
@@ -109,9 +109,9 @@ jobs:
           ls mshop-admin/target/
           ls mshop-app/target/
 
-      - name: Move ALL
-        run: |
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no mshop-admin/target/mshop-admin-5.1.0.jar ${{ secrets.USER }}@${{ secrets.HOST }}:/ecommerce/test-admin/tmp/
-          echo "Uploaded mshop-shop successfully!"
-          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no mshop-app/target/mshop-app-5.1.0.jar ${{ secrets.USER }}@${{ secrets.HOST }}:/ecommerce/test-app/tmp/
-          echo "Uploaded mshop-app successfully!"
+#      - name: Move ALL
+#        run: |
+#          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no mshop-admin/target/mshop-admin-5.1.0.jar ${{ secrets.USER }}@${{ secrets.HOST }}:/ecommerce/test-admin/tmp/
+#          echo "Uploaded mshop-shop successfully!"
+#          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no mshop-app/target/mshop-app-5.1.0.jar ${{ secrets.USER }}@${{ secrets.HOST }}:/ecommerce/test-app/tmp/
+#          echo "Uploaded mshop-app successfully!"
