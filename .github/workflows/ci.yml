@@ -135,7 +135,9 @@ jobs:
                     kill -9 "$OLD_PID" 2>/dev/null || true
                 fi
                 rm "$PID_FILE"
+                echo "REACHED HERE"
             fi
+            echo "NEXT STEP"
             EXTRA_PIDS=$(pgrep -f "$FULL_PATH")
             if [ -n "$EXTRA_PIDS" ]; then
                 echo "Cleaning up lingering processes: $EXTRA_PIDS"
