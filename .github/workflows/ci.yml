@@ -142,7 +142,7 @@ jobs:
                
             echo "Starting $APP_NAME..."
             setsid nohup java -jar "$APP_NAME" > "$APP_NAME.log" 2>&1 & echo $! > "$PID_FILE"
-            sleep 15
+            sleep 25
             FINAL_PID=$(cat "$PID_FILE")
             if kill -0 "$FINAL_PID" 2>/dev/null; then
                echo "Binary started successfully (PID=$FINAL_PID)"
