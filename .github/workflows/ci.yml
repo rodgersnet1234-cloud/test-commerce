@@ -138,11 +138,6 @@ jobs:
                 echo "REACHED HERE"
             fi
             echo "NEXT STEP"
-            EXTRA_PIDS=$(pgrep -f "$FULL_PATH")
-            if [ -n "$EXTRA_PIDS" ]; then
-                echo "Cleaning up lingering processes: $EXTRA_PIDS"
-                echo "$EXTRA_PIDS" | xargs kill -9 2>/dev/null || true
-            fi
             mv "$APP_DIR/tmp/$APP_NAME" "$FULL_PATH"
                
             echo "Starting $APP_NAME..."
