@@ -42,7 +42,7 @@ jobs:
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
-        with:  
+        with:
           distribution: temurin
           java-version: 17
 #      - name: Set JDK 1.8.0_202
@@ -109,3 +109,8 @@ jobs:
         run: |
           mvn clean install -DskipTests
           echo "Download finished and jars generated successfully!"
+
+      - name: CHECK DIRS
+        run: |
+          ls mshop-admin/target/
+          ls mshop-app/target/
