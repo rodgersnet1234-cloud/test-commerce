@@ -139,11 +139,9 @@ jobs:
             fi
             echo "NEXT STEP"
             mv "$APP_DIR/tmp/$APP_NAME" "$FULL_PATH"
-          
-          echo "Starting $APP_NAME..."
+               
+            echo "Starting $APP_NAME..."
             setsid java -jar "$FULL_PATH" > "$FULL_PATH.log" 2>&1 < /dev/null &
-            NEW_PID=$!
-            echo "$NEW_PID" > "$PID_FILE"
             sleep 5
             FINAL_PID=$(cat "$PID_FILE")
             if kill -0 "$FINAL_PID" 2>/dev/null; then
