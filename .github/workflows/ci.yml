@@ -116,7 +116,6 @@ jobs:
 #
       - name: Deploy Admin safely
         run: |
-          '
             APP_DIR=/www/wwwroot/cpsmanager.hngckj.top
             APP_NAME=mshop-admin-5.1.0.jar
             PID_FILE="$APP_DIR/$APP_NAME.pid"
@@ -155,7 +154,6 @@ jobs:
                tail -n 10 "$FULL_PATH.log"
                exit 1
             fi
-          '
 
 #      - name: Move ALL
 #        run: |
