@@ -38,6 +38,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+          cache: maven
 #      - name: Set JDK 1.8.0_202
 #        run: |
 #          echo "JAVA_HOME=/opt/jdk1.8.0_202" >> $GITHUB_ENV
@@ -58,13 +59,13 @@ jobs:
       #        run: echo "JAVA_HOME is set to $JAVA_HOME"
 
       # Install Maven (if necessary)
-      - name: Install Maven 3.6.3
-        run: |
-          wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
-          tar -xzf apache-maven-3.6.3-bin.tar.gz
-          sudo mv apache-maven-3.6.3 /opt/maven
-          sudo ln -sf /opt/maven/bin/mvn /usr/bin/mvn
-          mvn -version   
+#      - name: Install Maven 3.6.3
+#        run: |
+#          wget https://archive.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+#          tar -xzf apache-maven-3.6.3-bin.tar.gz
+#          sudo mv apache-maven-3.6.3 /opt/maven
+#          sudo ln -sf /opt/maven/bin/mvn /usr/bin/mvn
+#          mvn -version
 
       #      - name: Clean Maven local repository
       #        run: rm -rf ~/.m2/repository/*
